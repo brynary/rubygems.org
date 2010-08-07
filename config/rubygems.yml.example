@@ -1,10 +1,12 @@
 development:
   host: localhost
   local_storage: true
+  allow_unknown_dependencies: false
 
 test: &TEST
   host: www.example.com
   local_storage: true
+  allow_unknown_dependencies: false
 
 cucumber:
   <<: *TEST
@@ -12,11 +14,14 @@ cucumber:
 staging:
   host: staging.rubygems.org
   local_storage: false
+  allow_unknown_dependencies: false
 
 production:
   host: rubygems.org
   local_storage: false
+  allow_unknown_dependencies: false
 
 maintenance:
   host: rubygems.org
   local_storage: false
+  allow_unknown_dependencies: false

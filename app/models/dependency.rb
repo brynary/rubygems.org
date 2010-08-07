@@ -13,6 +13,12 @@ class Dependency < ActiveRecord::Base
 
   attr_accessor :gem_dependency
 
+  cattr_writer :allow_unknown
+
+  def self.allow_unknown
+    @@allow_unknown ||= false
+  end
+
   def name
     rubygem.name
   end
@@ -42,6 +48,8 @@ class Dependency < ActiveRecord::Base
   end
 
   def use_existing_rubygem
+    return true if self.class.allow_unknown
+
     self.rubygem = Rubygem.find_by_name(gem_dependency.name)
 
     if rubygem.blank?
